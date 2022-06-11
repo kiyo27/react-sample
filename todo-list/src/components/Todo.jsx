@@ -6,7 +6,7 @@ const Todo = (props) => {
     return (
         <ul className='todo'>
             {tasks.map((task, index) => 
-                <li key={index}>
+                <li key={task.id}>
                     <div className="checkAndTask">
                         <label className="checkContainer">
                             <input type="checkbox" onClick={() => handleComplete(index)} />

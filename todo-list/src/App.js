@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 import Form from './components/Form';
 import Todo from './components/Todo';
 import './App.css';
@@ -11,11 +13,30 @@ function App() {
     setFormInput(e.target.value)
   }
 
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const { data } = await axios.get(
+        'https://jsonplaceholder.cypress.io/todos?_limit=10'
+      );
+      const tasks = data.map((task, index) => {
+        return {
+          id: uuidv4(),
+          date: new Date().toLocaleDateString(),
+          task: task.title,
+          completed: task.completed
+        }
+      })
+      setTasks(tasks);
+    }
+    fetchTasks();
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault()
     if (formInput !== '') {
       const date = new Date().toLocaleDateString()
       const newTask = {
+        id: uuidv4(),
         date: date,
         task: formInput,
         completed: false
