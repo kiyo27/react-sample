@@ -20,7 +20,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
-// import Orders from './Orders';
+import Orders from './Orders';
 
 
 const drawerWidth = 240
@@ -108,6 +108,11 @@ function DashboardContent() {
             >
               Dashboard
             </Typography>
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -155,6 +160,23 @@ function DashboardContent() {
                   }}
                 >
                   <Chart />
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <Deposits />  
+                </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  <Orders />
                 </Paper>
               </Grid>
               
